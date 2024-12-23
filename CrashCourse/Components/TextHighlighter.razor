@@ -1,0 +1,28 @@
+﻿<button @onclick="HighlightText">highlight</button>
+
+@code {
+    @code {
+        [Inject] IJSRuntime? JSRuntime { get; set; }
+
+        private IJSObjectReference? _module; 
+
+        protected override async Task OnInitializedAsync() 
+        { 
+            _module = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./Components/TextHighlighter.razor.js"); 
+        }
+        protected async Task HighlightText() 
+        { 
+            if (_module != null) 
+                { 
+                    await _module.InvokeVoidAsync("highlightText", "hello-world"); 
+                } 
+        }
+        public async ValueTask DisposeAsync() 
+        { 
+            if (_module != null) 
+            { 
+                await _module.DisposeAsync(); 
+            } 
+        }
+    }
+}

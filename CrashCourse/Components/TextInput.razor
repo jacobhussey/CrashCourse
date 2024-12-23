@@ -1,0 +1,31 @@
+﻿<ResetButton 
+    Title="click me"
+    Text="Text"
+    TextChanged="TextChanged"
+/>
+
+<input
+    @bind="Text"
+    @bind:event="oninput"
+    @bind:after="OnTextChange"
+    placeholder="@Placeholder"
+/>
+
+@code {
+    [Parameter]
+    public int Number { get; set; }
+
+    [Parameter]
+    public string? Text { get; set; }
+
+    [Parameter]
+    public EventCallback<string> TextChanged { get; set; }
+
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    public async Task OnTextChange()
+    {
+        await TextChanged.InvokeAsync(Text);
+    }
+}

@@ -1,0 +1,11 @@
+﻿@typeparam TEntity where TEntity : IHasId
+
+@if(Entity != null)
+{
+    <div>Model Id: @Entity.Id</div>
+}
+
+@code {
+    [Parameter]
+    public TEntity? Entity { get; set; }
+}

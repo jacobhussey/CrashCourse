@@ -1,0 +1,36 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+<h1 id="hello-world">Hello, world!</h1>
+
+<TextInput 
+    @bind-Text="Model.Text"
+    Placeholder="Type here..."
+/>
+
+<DisplayText>
+    <div>@Model.Text</div>
+    <div>@Model.Number</div>
+</DisplayText>
+
+<NumericButton 
+    Title="Increment"
+    @bind-Number="Model.Number"
+    Value="1"
+/>
+
+<NumericButton 
+    Title="Decrement"
+    @bind-Number="Model.Number"
+    Value="-1"
+/>
+
+<TextHighlighter />
+
+<GenericComponent Entity="Model" />
+<GenericComponent Entity="Model2" />
+
+@code {
+    public Model Model { get; set; } = new();
+    public Model2 Model2 { get; set; } = new();
+}
